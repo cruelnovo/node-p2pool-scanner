@@ -49,12 +49,13 @@ function Geo() {
     })
   }
 
-  function extractGeo({ country_name, region_name, city, country_code }) {
+  //function extractGeo({ country_name, region_name, city, country_code }) {
+  function extractGeo({ country_name, region_name, country_code }) {
     const o = {
       country: country_name,
       region: region_name,
-      city,
-      code: country_code,
+      //city,
+      code: country_code
     }
 
     return o
@@ -65,7 +66,8 @@ function Geo() {
     const options = {
       host: 'api.ipstack.com',
       port: 80,
-      path: `/${ip}?access_key=${config.access_key}&fields=country_name,region_name,city,country_code`,
+      //path: `/${ip}?access_key=${config.access_key}&fields=country_name,region_name,city,country_code`,
+      path: `/${ip}?access_key=${config.access_key}&fields=country_name,region_name,country_code`,
       method: 'GET',
     }
 

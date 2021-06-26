@@ -1,31 +1,17 @@
 {
   "global": {
     "probe_N_IPs_simultaneously": 10,
-      "http_socket_timeout": 10000,
-      "rescan_list_delay": 5000,
+      "http_socket_timeout": 5000,
+      "rescan_list_delay": 1800000,
       "access_key": "Get free api key from https://ipstack.com/"
   },
 
     "instances": {
-      "dash": {
-        "port": 7903,						
-        "currency": "DASH",
-        "addr_file": "/opt/p2pool/data/dash/addrs",
-        "store_file": "data/p2pool-dash-public.json"
-      },
-
-      "ltc": {
-        "port": 9327,	
-        "currency": "Litecoin",
-        "addr_file": "/opt/p2pool/data/litecoin/addrs",
-        "store_file": "data/p2pool-litecoin-public.json"
-      },
-
-      "btc": {
-        "port": 9334,
-        "currency": "Bitcoin",
-        "addr_file": "/opt/p2pool/data/bitcoin/addrs",
-        "store_file": "data/p2pool-bitcoin-public.json"
+      "vtc": {
+        "port": 9171,
+        "currency": "Vertcoin",
+        "addr_file": "/mining/p2pool-vtc/data/vertcoin/addrs",
+        "store_file": "data/p2pool-vertcoin-public.json"
       }
     }
 }

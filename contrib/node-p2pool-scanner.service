@@ -4,7 +4,7 @@ Description=Node P2Pool scanner
 [Service]
 User=CHANGE_ME_TO_USER
 Group=WHO_OWN_WORK_DIR
-WorkingDirectory=/opt/node-p2pool-scanner
+WorkingDirectory=/mining/node-p2pool-scanner
 ExecStart=/usr/bin/node --experimental-modules --experimental-json-modules app.mjs
 Environment=NODE_ENV=production PORT=43000 DEBUG=node-p2pool-scanner:*:*
 Type=simple

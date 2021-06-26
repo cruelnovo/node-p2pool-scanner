@@ -137,7 +137,7 @@ function Scanner(config) {
       info: [],
     }
     const list = _.sortBy(_.toArray(self.addr_working), ({ ip, goodRate, stats }) => {
-      if (ip === '5.9.143.40') { return -1 } else if (goodRate && stats.shares.total) { return goodRate * goodRate * Math.log(stats.shares.total) }
+      if (goodRate && stats.shares.total) { return goodRate * goodRate * Math.log(stats.shares.total) }
       return 0
     })
 
@@ -150,6 +150,7 @@ function Scanner(config) {
         uptime: info.stats ? (info.stats.uptime / 60 / 60 / 24).toFixed(1) : 'N/A',
         effi: info.goodRate && publicGoodRate ? ((info.goodRate / publicGoodRate) * 100).toFixed(2) : 'N/A',
         version: info.stats.version ? _.replace(info.stats.version, /-g.*/, '') : 'N/A',
+        protocol_version: info.stats.protocol_version ? _.replace(info.stats.protocol_version, /-g.*/, '') : 'N/A',
         hashrate: parseInt(info.totalHashRate, 10),
         users: info.totalUsers,
         gwtl: info.gwtl,
@@ -317,8 +318,8 @@ function Scanner(config) {
 
       // console.log('P2POOL DIGESTING:', info.ip);
     digestLocalStats(info, (err, stats) => {
-      if (!err && stats && (stats.protocol_version >= 1300)) {
-          //  Exclude nodes lacking protocol_version or older than 1300
+      if (!err && stats && (stats.protocol_version >= 1800)) {
+          //  Exclude nodes lacking protocol_version or older than 1800
         info.stats = stats
         info.fee = stats.fee
         digestShares(info, (errDigest, shares) => {
@@ -350,13 +351,14 @@ function Scanner(config) {
           if (!errDigestGlobal) { self.update_global_stats(statsDigest) }
 
           if (!info.geo) {
-            self.geo.get(info.ip, (errGeo, { code, country, region, city }) => {
+            //self.geo.get(info.ip, (errGeo, { code, country, region, city }) => {
+            self.geo.get(info.ip, (errGeo, { code, country, region }) => {
               if (!errGeo) {
                 info.geo = {}
                 info.geo.code = code
                 info.geo.country = country
                 if (region) { info.geo.country += `, ${region}` }
-                if (city) { info.geo.country += `, ${city}` }
+                //if (city) { info.geo.country += `, ${city}` }
               }
             })
           }
@@ -418,4 +420,3 @@ function Scanner(config) {
 }
 
 export default Scanner
-
